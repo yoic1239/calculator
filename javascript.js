@@ -30,7 +30,16 @@ function operate(num1, operator, num2) {
     }
 }
 
-let num1, operator, num2;
+function clearVal() {
+    num1 = '';
+    operator = '';
+    num2 = '';
+    displayVal = '';
+}
+
+let num1 = '';
+let operator = '';
+let num2 = '';
 let displayVal = '';
 const displayBlk = document.querySelector('.display');
 const operators = document.querySelectorAll('.operators');
@@ -45,19 +54,28 @@ numbers.forEach(number => number.addEventListener('click', function(){
 }));
 
 operators.forEach(btn => btn.addEventListener('click', function(){
+    if (num1 !== '') {
+        num2 = displayVal;
+        displayVal = operate(num1, operator, num2);
+        displayBlk.textContent = displayVal;
+        num2 = ''
+        displayVal = '';
+    }
+
     num1 = (displayVal !== '') ? displayVal : displayBlk.textContent;
     operator = btn.value;
     displayVal = '';
 }));
 
 equal.addEventListener('click', function(){
-    num2 = displayVal;
+    if (num1 === '' || operator === '') return;
+    num2 = (displayVal !== '') ? displayVal : displayBlk.textContent;
     displayVal = operate(num1, operator, num2);
     displayBlk.textContent = displayVal;
-    displayVal = '';
+    clearVal();
 });
 
 clear.addEventListener('click', function() {
-    displayVal = '';
+    clearVal();
     displayBlk.textContent = '0';
 });
