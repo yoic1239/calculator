@@ -1,7 +1,13 @@
 .display {
     border: 1px solid #808080;
-    height: 3rem;
+    box-sizing: border-box;
+    height: 3.5rem;
     width: 215px;
+    font-size: 2rem;
+    padding: 8px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 button {
