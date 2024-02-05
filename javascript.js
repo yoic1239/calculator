@@ -39,6 +39,7 @@ const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
 
 numbers.forEach(number => number.addEventListener('click', function(){
+    if (number.value === '0' && displayVal === '') return;
     displayVal += number.value;
     displayBlk.textContent = displayVal;
 }));
