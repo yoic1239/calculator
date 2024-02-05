@@ -1,0 +1,10 @@
+.display {
+    border: 1px solid #808080;
+    height: 3rem;
+    width: 215px;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+}
