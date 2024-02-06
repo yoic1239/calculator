@@ -20,9 +20,9 @@ function operate(num1, operator, num2) {
 
     switch(operator) {
         case "+":
-            return add(num1, num2);
+            return Math.round(add(num1, num2) * 10000) / 10000;
         case "-":
-            return subtract(num1, num2);
+            return Math.round(subtract(num1, num2) * 10000) / 10000;
         case "*":
             return Math.round(multiply(num1, num2) * 10000) / 10000;
         case "/":
@@ -30,46 +30,27 @@ function operate(num1, operator, num2) {
     }
 }
 
-function clearVal() {
-    num1 = '';
-    operator = '';
-    num2 = '';
-    displayVal = '';
-    operators.forEach(btn => btn.classList.remove('selected-operator'));
-}
-
-let num1 = '';
-let operator = '';
-let num2 = '';
-let displayVal = '';
-const displayBlk = document.querySelector('.display');
-const operators = document.querySelectorAll('.operators');
-const numbers = document.querySelectorAll('.numbers');
-const equal = document.querySelector('.equal');
-const clear = document.querySelector('.clear');
-const backspace = document.querySelector('.backspace');
-
-numbers.forEach(number => number.addEventListener('click', function(){
+function enterNumber(num) {
     if (operator !== '') {
         operators.forEach(btn => btn.classList.remove('selected-operator'));
     }
 
-    if (number.value === '0' && displayVal === '0') {
+    if (num === '0' && displayVal === '0') {
         return;
     } else if (displayVal === '0') {
         displayVal = '';
     }
 
-    if (number.value === '.' && displayVal.includes('.')) {
+    if (num === '.' && displayVal.includes('.')) {
         return;
-    } else if (number.value === '.' && displayVal === '') {
+    } else if (num === '.' && displayVal === '') {
         displayVal = '0'
     }
-    displayVal += number.value;
+    displayVal += num;
     displayBlk.textContent = displayVal;
-}));
+}
 
-operators.forEach(btn => btn.addEventListener('click', function(){
+function enterOperator(btn) {
     if (operator !== '' && displayVal === '') {
         operators.forEach(btn => btn.classList.remove('selected-operator'));
         operator = btn.value;
@@ -89,22 +70,25 @@ operators.forEach(btn => btn.addEventListener('click', function(){
     operator = btn.value;
     btn.classList.add('selected-operator');
     displayVal = '';
-}));
+}
 
-equal.addEventListener('click', function(){
+function enterEqual() {
     if (num1 === '' || operator === '') return;
     num2 = (displayVal !== '') ? displayVal : displayBlk.textContent;
     displayVal = operate(num1, operator, num2);
     displayBlk.textContent = displayVal;
     clearVal();
-});
+}
 
-clear.addEventListener('click', function() {
-    clearVal();
-    displayBlk.textContent = '0';
-});
+function clearVal() {
+    num1 = '';
+    operator = '';
+    num2 = '';
+    displayVal = '';
+    operators.forEach(btn => btn.classList.remove('selected-operator'));
+}
 
-backspace.addEventListener('click', function() {
+function undo() {
     if (displayVal.length > 1) {
         displayVal = displayVal.slice(0, displayVal.length - 1);
     } else if (displayVal.length == 1) {
@@ -113,4 +97,58 @@ backspace.addEventListener('click', function() {
         return;
     }
     displayBlk.textContent = displayVal;
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+let num1 = '';
+let operator = '';
+let num2 = '';
+let displayVal = '';
+const displayBlk = document.querySelector('.display');
+const operators = document.querySelectorAll('.operators');
+const numbers = document.querySelectorAll('.numbers');
+const equal = document.querySelector('.equal');
+const clear = document.querySelector('.clear');
+const backspace = document.querySelector('.backspace');
+
+
+numbers.forEach(number => number.addEventListener('click', function(){
+    enterNumber(number.value);
+}));
+
+operators.forEach(btn => btn.addEventListener('click', function(){
+    enterOperator(btn);
+}));
+
+equal.addEventListener('click', enterEqual);
+
+clear.addEventListener('click', function() {
+    clearVal();
+    displayBlk.textContent = '0';
+});
+
+backspace.addEventListener('click', undo);
+
+document.addEventListener('keydown', function(e) {
+    if (e.key.match(/[.0-9]/)) {
+        enterNumber(e.key);
+    } else if (e.key === '+') {
+        enterOperator(document.querySelector('#add'));
+    } else if (e.key === '-') {
+        enterOperator(document.querySelector('#minus'));
+    } else if (e.key === '*') {
+        enterOperator(document.querySelector('#multiply'));
+    } else if (e.key === '/') {
+        enterOperator(document.querySelector('#divide'));
+    } else if (e.key === '=' || e.key === 'Enter') {
+        enterEqual();
+    } else if (e.key === 'c' || e.key === 'C') {
+        clearVal();
+        displayBlk.textContent = '0';
+    } else if (e.key === 'Backspace') {
+        undo();
+    }
 });
