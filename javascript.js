@@ -53,7 +53,17 @@ numbers.forEach(number => number.addEventListener('click', function(){
         operators.forEach(btn => btn.classList.remove('selected-operator'));
     }
 
-    if (number.value === '0' && displayVal === '') return;
+    if (number.value === '0' && displayVal === '0') {
+        return;
+    } else if (displayVal === '0') {
+        displayVal = '';
+    }
+
+    if (number.value === '.' && displayVal.includes('.')) {
+        return;
+    } else if (number.value === '.' && displayVal === '') {
+        displayVal = '0'
+    }
     displayVal += number.value;
     displayBlk.textContent = displayVal;
 }));

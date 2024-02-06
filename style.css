@@ -42,6 +42,8 @@ button.clear, button.backspace {
     width: 48%;
     font-size: 40px;
     padding: 3px 0;
+    background-color: #ffe9b7;
+    color: #3a3a3a;
 }
 
 button.numbers {
