@@ -35,6 +35,7 @@ function clearVal() {
     operator = '';
     num2 = '';
     displayVal = '';
+    operators.forEach(btn => btn.classList.remove('selected-operator'));
 }
 
 let num1 = '';
@@ -48,6 +49,10 @@ const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
 
 numbers.forEach(number => number.addEventListener('click', function(){
+    if (operator !== '') {
+        operators.forEach(btn => btn.classList.remove('selected-operator'));
+    }
+
     if (number.value === '0' && displayVal === '') return;
     displayVal += number.value;
     displayBlk.textContent = displayVal;
@@ -64,6 +69,7 @@ operators.forEach(btn => btn.addEventListener('click', function(){
 
     num1 = (displayVal !== '') ? displayVal : displayBlk.textContent;
     operator = btn.value;
+    btn.classList.add('selected-operator');
     displayVal = '';
 }));
 

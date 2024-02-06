@@ -1,16 +1,67 @@
+.calculator {
+    border: 1px solid #253244;
+    border-radius: 15px;
+    box-sizing: border-box;
+    width: 40vw;
+    min-width: 500px;
+    margin: auto;
+    background-color: #3B485A;
+    padding: 48px 36px 20px;
+}
+
 .display {
     border: 1px solid #808080;
     box-sizing: border-box;
-    height: 3.5rem;
-    width: 215px;
-    font-size: 2rem;
-    padding: 8px;
+    height: 100px;
+    font-size: 80px;
+    padding: 16px;
     display: flex;
     justify-content: end;
     align-items: center;
+    background-color: #A7BAC6;
+    margin-bottom: 25px;
+}
+
+.btns div {
+    display: flex;
+    justify-content: space-between;
+    margin: 16px 0;
 }
 
 button {
-    width: 50px;
-    height: 50px;
+    border-radius: 8px;
+}
+
+.numbers, .operators, .equal {
+    width: 23%;
+    aspect-ratio: 1 / 1;
+    font-size: 80px;
+}
+
+button.clear, button.backspace {
+    width: 48%;
+    font-size: 40px;
+    padding: 3px 0;
+}
+
+button.numbers {
+    background-color: #7895A8;
+    color: #FFFFFF;
+    border-color: #4E6879;
+}
+
+button.operators {
+    background-color: #F8C747;
+    color: #FFFFFF;
+    border-color: #C58436;
+}
+
+button.equal {
+    background-color: #ED6E3E;
+    color: #FFFFFF;
+    border-color: #A04725;
+}
+
+button.selected-operator {
+    border: 4px solid #FFFFFF;
 }
