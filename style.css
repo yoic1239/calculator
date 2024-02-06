@@ -20,6 +20,7 @@
     align-items: center;
     background-color: #A7BAC6;
     margin-bottom: 25px;
+    overflow: hidden;
 }
 
 .btns div {

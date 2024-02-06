@@ -24,9 +24,9 @@ function operate(num1, operator, num2) {
         case "-":
             return subtract(num1, num2);
         case "*":
-            return multiply(num1, num2);
+            return Math.round(multiply(num1, num2) * 10000) / 10000;
         case "/":
-            return divide(num1, num2);
+            return Math.round(divide(num1, num2) * 10000) / 10000;
     }
 }
 
