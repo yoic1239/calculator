@@ -47,6 +47,7 @@ const operators = document.querySelectorAll('.operators');
 const numbers = document.querySelectorAll('.numbers');
 const equal = document.querySelector('.equal');
 const clear = document.querySelector('.clear');
+const backspace = document.querySelector('.backspace');
 
 numbers.forEach(number => number.addEventListener('click', function(){
     if (operator !== '') {
@@ -101,4 +102,15 @@ equal.addEventListener('click', function(){
 clear.addEventListener('click', function() {
     clearVal();
     displayBlk.textContent = '0';
+});
+
+backspace.addEventListener('click', function() {
+    if (displayVal.length > 1) {
+        displayVal = displayVal.slice(0, displayVal.length - 1);
+    } else if (displayVal.length == 1) {
+        displayVal = '0';
+    } else {
+        return;
+    }
+    displayBlk.textContent = displayVal;
 });
