@@ -145,7 +145,7 @@ document.addEventListener('keydown', function(e) {
         enterOperator(document.querySelector('#divide'));
     } else if (e.key === '=' || e.key === 'Enter') {
         enterEqual();
-    } else if (e.key === 'c' || e.key === 'C') {
+    } else if (e.key === 'c' || e.key === 'C' || e.key === 'Escape') {
         clearVal();
         displayBlk.textContent = '0';
     } else if (e.key === 'Backspace') {
