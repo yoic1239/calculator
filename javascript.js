@@ -59,6 +59,13 @@ numbers.forEach(number => number.addEventListener('click', function(){
 }));
 
 operators.forEach(btn => btn.addEventListener('click', function(){
+    if (operator !== '' && displayVal === '') {
+        operators.forEach(btn => btn.classList.remove('selected-operator'));
+        operator = btn.value;
+        btn.classList.add('selected-operator');
+        return;
+    }
+
     if (num1 !== '') {
         num2 = displayVal;
         displayVal = operate(num1, operator, num2);
